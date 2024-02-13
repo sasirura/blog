@@ -9,8 +9,8 @@ dependencies:
     specifier: ^2.0.4
     version: 2.0.4
   '@astrojs/rss':
-    specifier: 3.0.0
-    version: 3.0.0
+    specifier: 4.0.5
+    version: 4.0.5
   astro:
     specifier: 3.5.3
     version: 3.5.3(typescript@5.2.2)
@@ -240,8 +240,8 @@ packages:
     dependencies:
       prismjs: 1.29.0
 
-  /@astrojs/rss@3.0.0:
-    resolution: {integrity: sha512-PMX8iqByk9gtOrusikten/oF5uHjOCZigL6RuXFBUu+xtdKQxXzfIohJ99V2haA4FJjVDyibDTGzXR81POBMxQ==}
+  /@astrojs/rss@4.0.5:
+    resolution: {integrity: sha512-IyJVL6z09AQtxbgLaAwebT3T5YKe4oTHDesqydJv1KLHw+zEzzMCFuuNsEyxjiqu7df9+DDCpDXLj/WRiEUXvw==}
     dependencies:
       fast-xml-parser: 4.3.2
       kleur: 4.1.5
@@ -8353,6 +8353,7 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
     dev: true
+    bundledDependencies: false
 
   /cross-fetch@3.1.8:
     resolution: {integrity: sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==}
