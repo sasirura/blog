@@ -1,2 +1,2 @@
 // List of categories for blog posts
-export const CATEGORIES = ['React'] as const
+export const CATEGORIES = ['React', 'Javascript'] as const

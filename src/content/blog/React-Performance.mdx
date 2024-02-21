@@ -179,10 +179,16 @@ function Todo() {
   <ActionContext.Provider value = { dispatch} >
     <TodoContext.Provider value = { state } >
       { children }
-      < /TodoContext>
+      </TodoContext>
   </ActionContext >
   )
 }
 ```
 
 Context order is important here. We have to put the one that doesn't change outside of one that change.
+
+## Note From Dan
+
+Never thought Dan himself would comment about my blog post, But here we are!
+
+![](/src/assets/images/dan.jpeg)
