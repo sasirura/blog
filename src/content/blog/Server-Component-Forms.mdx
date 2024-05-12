@@ -1,15 +1,113 @@
 ---
-heroImage: /src/assets/images/placeholder-about.jpg
+heroImage: /src/assets/images/lights.jpg
 category: React
-description: RSC
-pubDate: 2024-02-12T18:30:00.000Z
-draft: true
+description: React server component and using it with forms
+pubDate: 2024-02-22T18:30:00.000Z
+draft: false
 tags:
   - RSC
   - React.js
-title: Server Component Forms
+title: Server Components & Server Actions
 ---
 
-## React Forms
+Recently, I started to use Nextjs 14 and there are a few new things Nextjs 14 introduced. App router, Server actions, React I am excited to share my experience of using Nextjs 14 and exploring its new features such as App router, Server actions, React Server component support, and more. Despite the abundance of online tutorials covering these improvements, I want to share my approach to these new features and how I tackled the unique problems that arose while working with them.
 
-## Server Component Forms
+## React Server Component
+
+The main thing that Next.js 14 brings is the new server component model introduced by React. The React library alone cannot leverage this model because it requires some additional dependencies. Next.js adopted these changes early, and it's a new mental model that requires some references to learn about. React Server Components are the name of the new mental model of React support, which comprises two main components: Server Components and Client Components.
+
+If you think that Server Components are built on the server and Client Components are built on the browser like before, it's not exactly happening that way anymore.
+
+In Nextjs 14 everything built on the server. Server means where you run the npm run build command. Whether it's your local computer or a remote server.
+
+Let's say if you want to access the browser window APIs like alert.
+
+```typescript
+<button onClick=(() => alert("clicked"))>
+```
+
+When building things on the server, you do not have access to the window object. However, you may need to access the window object at some point. This is where client components come into play. To use client components, just add 'use client' at the top of the file. When you do this, Nextjs will handle the building process for you. Now, when you use the components on the browser, you can access the browser window to handle this. It will open a portal-like something to the browser window object. Some may think that client components are bad because they use the browser window object, but it is not bad. In fact, it is an important part of this new model.
+
+\- You can combine server components and client components.
+
+\- The default server component must be a parent component.
+
+It is important to understand these key parts of the next section, so let me tell you about them.
+
+## Server Actions
+
+Now let's implement a server action
+
+```html
+<form action="{addUser}">
+	<input type="text" name="name" />
+	<button type="submit">Submit</button>
+</form>
+```
+
+addUser function will looke like this
+
+```typescript
+'use server'
+
+export async function addUsee(formData: formData) {
+	const name = formData.get('name')
+	return { status: 200, message: 'successfully completed', data: name }
+}
+```
+
+After validate the data you can do whatever you want to do this with data
+
+Most of these codes are self explanatory. I want to explain one things here.
+
+### 'use server'
+
+What does it mean to 'use server' ? It's saying use server for this function to run. But we just learnt everything is build on the server. So What is this means ?
+
+'use server' is a way of saying this file or function (if this is on top of the file it'll mark all the functions inside that file) can call from the client side code. It's like give something like portal to the client side code to call the server side function.
+
+After we submit data to the action file we need to get the return state. React team introduced two new hooks to to that. [useFormStatus](https://react.dev/reference/react-dom/hooks/useFormStatus 'useFormStatus') and [useFormState](https://react.dev/reference/react-dom/hooks/useFormState 'useFormState').
+
+> please note that Teact 19 changed useFormState to useActionState but the same idea and functionalities. You can swap the name if you are using React 19.
+
+I kindly ask you to read the friendly manual to get more details of these new hooks before you proceed.
+
+To put it simply useFormStatus gives the status information ( if action files returns something) and useFormState gives us the results of the form action.
+
+Now we have to change the form component a bit.
+
+```typescript
+'use client'
+import { useFormState } from "react-dom"
+import { create, State } from '/.action.js'
+
+function Submit() {
+  const status = useFormStatus();
+  return <button disabled={status.pending}>Submit</button>
+}
+
+const [state, dispatch] = useFormState <State,FormData> (create, null)
+
+return (
+  <form action={ dispatch }>
+    <Submit>
+  </form>
+)
+```
+
+If we want to show notifications or use the return state , we can use a useEffect hook to achieve that.
+
+```javascript
+useEffect(() => {
+	if (!state) {
+		return
+	}
+	if (state.status === 'success') {
+		// do something
+	}
+
+	if (state.status === 'error') {
+		// do something
+	}
+}, [state])
+```
