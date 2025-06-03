@@ -1,38 +1,51 @@
 ---
-import ListCategories from '@/components/ListCategories'
-import ListPosts from '@/components/ListPosts'
-import TitlePage from '@/components/TitlePage'
-import BaseLayout from '@/layouts/BaseLayout'
-import { getPosts } from '@/utils'
-
-const MAX_POSTS = 5 // max number of posts to show on the home page
-const posts = await getPosts(MAX_POSTS)
+import { featuredArticles, featuredProjects } from "../lib/featured";
+import { GLOBAL } from "../lib/variables";
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/home/Hero.astro";
+import Section from "../components/common/Section.astro";
+import FeaturedProjects from "../components/home/FeaturedProjects.astro";
+import FeaturedArticles from "../components/home/FeaturedArticles.astro";
 ---
 
-<BaseLayout title='Home'>
-	<TitlePage title={'Sasiru Blog'} />
-	<ListCategories />
-
-	<div>
-		<h2 class='text-lg font-medium tracking-wide text-end'>Latest Posts</h2>
-		<ListPosts FirstBig={true} posts={posts} />
-	</div>
-</BaseLayout>
-
-<script>
-	import { animate } from 'motion'
-	const showAnimations = localStorage.getItem('animations') === 'true'
-
-	if (showAnimations) {
-		animate(
-			'.title',
-			{ y: [80, 0], opacity: [0, 1] },
-			{
-				duration: 2.5,
-				opacity: { duration: 3 },
-
-				offset: [0, 0.55, 0.75]
-			}
-		)
-	}
-</script>
+<Layout>
+  <Fragment slot="head">
+    <title>{GLOBAL.username} • {GLOBAL.shortDescription}</title>
+    <meta
+      name="description"
+      content={GLOBAL.longDescription}
+    />
+    <meta
+      property="og:title"
+      content={`${GLOBAL.username} • ${GLOBAL.shortDescription}`}
+    />
+    <meta
+      property="og:description"
+      content={GLOBAL.longDescription}
+    />
+    <meta property="og:image" content={`${GLOBAL.rootUrl}/zaggonaut.png`} /> 
+    <meta property="og:url" content={GLOBAL.rootUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content={`${GLOBAL.username} • ${GLOBAL.shortDescription}`}
+    />
+    <meta
+      name="twitter:description"
+      content={GLOBAL.longDescription}
+    />
+    <meta name="twitter:image" content={`${GLOBAL.rootUrl}/zaggonaut.png`} />
+    <meta http-equiv="content-language" content="en" />
+    <meta name="language" content="English" />
+    <link rel="canonical" href={GLOBAL.rootUrl} />
+  </Fragment>
+  <Section class="my-16">
+    <Hero />
+  </Section>
+  <Section>
+    <FeaturedProjects featuredProjects={featuredProjects} />
+  </Section>
+  <Section>
+    <FeaturedArticles featuredArticles={featuredArticles} />
+  </Section>
+</Layout>
