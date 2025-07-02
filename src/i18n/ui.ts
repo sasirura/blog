@@ -1,5 +1,5 @@
 export const ui = {
-  'en': {
+  en: {
     title: 'Sasiru',
     subtitle: 'Thoughts on Code',
     description:
@@ -8,5 +8,6 @@ export const ui = {
     tags: 'Tags',
     about: 'About',
     toc: 'Table of Contents',
-  }
+    resume: 'Resume',
+  },
 }

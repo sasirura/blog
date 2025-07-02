@@ -117,9 +117,9 @@ React has hooks to help
 Let's check the function below.
 
 ```typescript
-const handleAddTodo = (text) => {
-	const newTodo = { id: nextId++, text }
-	setTodos([...todos, newTodo])
+function handleAddTodo(text) {
+  const newTodo = { id: nextId++, text }
+  setTodos([...todos, newTodo])
 }
 ```
 
@@ -128,10 +128,10 @@ So the thing here is we're re-creating these functions on every render. Above is
 But, things get a little bit trickier. We could try to wrap these functions in useCallback.
 
 ```typescript
-cconst handleAddTodo = useCallback((text) => {
-  const newTodo = { id: nextId++, text };
-  setTodos([...todos, newTodo]);
-}, [todos]);
+const handleAddTodo = useCallback((text) => {
+  const newTodo = { id: nextId++, text }
+  setTodos([...todos, newTodo])
+}, [todos])
 ```
 
 It technically works, but it doesn't exactly do us a lot of good. The problem is that todos is really the only thing we're ever dealing with in this application and it's basically changing every time we do anything.
@@ -142,8 +142,8 @@ So what you could do is
 
 ```typescript
 const handleAddTodo = useCallback((text) => {
-	const newTodo = { id: nextId++, text }
-	setTodos((todos) => [...todos, newTodo])
+  const newTodo = { id: nextId++, text }
+  setTodos(todos => [...todos, newTodo])
 }, [])
 ```
 
@@ -157,9 +157,9 @@ const TodoContext = createContext(initialContextValues)
 function Todo() {
   const [state, dispatch] = useReducer(reducer, initialArg)
   return (
-    <TodoContext.Provider value = {{ state, dispatch }} >
+    <TodoContext.Provider value={{ state, dispatch }}>
       { children }
-    < /TodoContext>
+    </TodoContext>
   )
 }
 

@@ -31,6 +31,11 @@ const navItems = [
     label: currentUI.about,
     className: getNavItemClass(isAboutActive),
   },
+  {
+    href: 'https://sasirura.github.io/resume/resume.pdf',
+    label: currentUI.resume,
+    className: getNavItemClass(false),
+  }
 ]
 ---
 
@@ -46,8 +51,9 @@ const navItems = [
     {navItems.map(item => (
       <li>
         <a
-          href={getLocalizedPath(item.href)}
+          href={item.label === "Resume" ? item.href : getLocalizedPath(item.href)}
           class={item.className}
+          target={item.label === "Resume" ? "_blank" : "_self"}
         >
           {item.label}
         </a>
