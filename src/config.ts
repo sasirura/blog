@@ -14,7 +14,7 @@ export const themeConfig: ThemeConfig = {
     // author name
     author: 'sasirura',
     // site url
-    url: 'https://www.sasiru.eu.org',
+    url: 'https://www.sasiru.lk',
     // favicon url
     // recommended formats: svg, png or ico
     favicon: '/icons/favicon.svg', // or https://example.com/favicon.svg
