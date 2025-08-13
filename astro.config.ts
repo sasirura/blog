@@ -137,8 +137,8 @@ export default defineConfig({
     shikiConfig: {
       // Available themes: https://shiki.style/themes
       themes: {
-        light: 'gruvbox-light-medium',
-        dark: 'gruvbox-dark-medium',
+        light: 'rose-pine',
+        dark: 'rose-pine-dawn',
       },
     },
   },

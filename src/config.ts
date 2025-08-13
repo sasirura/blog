@@ -168,11 +168,11 @@ export const themeConfig: ThemeConfig = {
       },
       {
         name: 'Email',
-        url: 'sasiruravihansa@gmail.com',
+        url: 'hi@sasiru.lk',
       },
       {
         name: 'Bsky',
-        url: 'https://bsky.app/profile/sasiru.eu.org',
+        url: 'https://bsky.app/profile/sasiru.lk',
       },
     ],
     // year of website start

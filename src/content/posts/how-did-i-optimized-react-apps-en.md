@@ -195,4 +195,4 @@ Context order is important here. We have to put the one that doesn't change outs
 
 Never thought Dan himself would comment about my blog post, But here we are!
 
-[https://bsky.app/profile/sasiru.eu.org/post/3kl6quo5v472f](https://bsky.app/profile/sasiru.eu.org/post/3kl6quo5v472f)
+[https://bsky.app/profile/sasiru.lk/post/3kl6quo5v472f](https://bsky.app/profile/sasiru.lk/post/3kl6quo5v472f)
